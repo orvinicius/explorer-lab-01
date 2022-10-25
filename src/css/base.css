@@ -23,6 +23,8 @@ body {
 
   display: flex;
   place-items: center;
+  justify-content: center;
+  flex-direction: column;
 
   min-height: 100vh;
 }
@@ -49,4 +51,27 @@ body {
 #app header {
   display: flex;
   align-items: center;
+}
+
+.list {
+  margin-top: 30px;
+  font-size: 80%;
+
+  font-family: Inter, sans-serif;
+  color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+li {
+  margin: 10px;
+  list-style: none;
+}
+
+.list ul {
+  list-style: none;
 }
