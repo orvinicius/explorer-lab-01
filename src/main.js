@@ -90,13 +90,72 @@ const cardNumberPattern = {
 
 const cardNumberMasked = IMask(cardNumber, cardNumberPattern) //executa o IMask para o padrão de numero do cartão
 
+//**Salvar infos do input em um array **
+
+const listCard = document.querySelector(".list ol")
+const ccHolder = document.querySelector("#card-holder")
+const ccNumber = document.querySelector("#card-number")
+const ccExpiration = document.querySelector("#expiration-date")
+const ccSecurity = document.querySelector("#security-code")
+
 const addButton = document.querySelector("#add-card")
 addButton.addEventListener("click", () => {
-  addCard()
-  console.log(infos)
+  let infos = new Array()
+
+  if (localStorage.hasOwnProperty("infos")) {
+    infos = JSON.parse(localStorage.getItem("infos"))
+  }
+
+  infos.push({
+    number: ccNumber.value,
+    name: ccHolder.value,
+    expiration: ccExpiration.value,
+    cvc: ccSecurity.value,
+  })
+
+  localStorage.setItem("infos", JSON.stringify(infos))
+
+  listCard.insertAdjacentHTML(
+    "beforeend",
+    `<li>Nome do Cartão: ${ccHolder.value}</li>`
+  )
+  listCard.insertAdjacentHTML(
+    "beforeend",
+    `<li>Número do Cartão: ${ccNumber.value}</li>`
+  )
+  listCard.insertAdjacentHTML(
+    "beforeend",
+    `<li>Expiração: ${ccExpiration.value}</li>`
+  )
+  listCard.insertAdjacentHTML(
+    "beforeend",
+    `<li>CVC: ${ccSecurity.value}</li> <br>`
+  )
 
   //alert("Cartão adicionado!")
   // window.location.reload(true)
+})
+
+//carrega os dados salvos
+
+window.addEventListener("load", (_) => {
+  if (localStorage.hasOwnProperty("infos")) {
+    JSON.parse(localStorage.getItem("infos")).forEach((info) => {
+      listCard.insertAdjacentHTML(
+        "beforeend",
+        `<li>NÚMERO DO CARTÃO: ${info.number}</li>`
+      )
+      listCard.insertAdjacentHTML(
+        "beforeend",
+        `<li>NOME DO TITULAR: ${info.name}</li>`
+      )
+      listCard.insertAdjacentHTML(
+        "beforeend",
+        `<li>DATA DE VALIDADE: ${info.expiration}</li>`
+      )
+      listCard.insertAdjacentHTML("beforeend", `<li>CVC: ${info.cvc}</li> <br>`)
+    })
+  }
 })
 
 document.querySelector("form").addEventListener("submit", (event) => {
@@ -146,45 +205,4 @@ expirationDateMasked.on("accept", () => {
 function updateExpirationDate(date) {
   const ccExpiration = document.querySelector(".cc-extra .value")
   ccExpiration.innerText = date.length === 0 ? "02/32" : date
-}
-
-let listCard = document.querySelector(".list")
-let infos = []
-
-function addCard() {
-  const ccHolder = document.querySelector("#card-holder").value
-  const ccNumber = document.querySelector("#card-number").value
-  const ccExpiration = document.querySelector("#expiration-date").value
-  const ccSecurity = document.querySelector("#security-code").value
-  let cards = [
-    {
-      number: ccNumber,
-      name: ccHolder,
-      expiration: ccExpiration,
-      cvc: ccSecurity,
-    },
-  ]
-  infos.push(cards)
-  localStorage.setItem("infos", JSON.stringify(infos))
-  listCard.insertAdjacentHTML(
-    "beforeend",
-    `<li>Nome do Cartão: ${ccHolder}</li>`
-  )
-  listCard.insertAdjacentHTML(
-    "beforeend",
-    `<li>Número do Cartão: ${ccNumber}</li>`
-  )
-  listCard.insertAdjacentHTML(
-    "beforeend",
-    `<li>Expiração: ${ccExpiration}</li>`
-  )
-  listCard.insertAdjacentHTML("beforeend", `<li>CVC: ${ccSecurity}</li> <br>`)
-
-  window.addEventListener("load", (_) => {
-    if (localStorage.hasOwnProperty("cards")) {
-      JSON.parse(localStorage.getItem("cards")).forEach((infos) => {
-        result.insertAdjacentHTML("beforeend", `<li>${infos.number}</li>`)
-      })
-    }
-  })
 }
