@@ -72,7 +72,58 @@ li {
   list-style: none;
 }
 
-.list ol {
+.styled {
   list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.styled li {
+  padding-left: 1rem;
+  text-indent: -0.75rem;
+}
+
+.styled li::before {
+  content: "💳 ";
+}
+
+.styled li:nth-child(2)::before {
+  content: "🧑 ";
+}
+.styled li:nth-child(3)::before {
+  content: " 📅 ";
+}
+.styled li:nth-child(4)::before {
+  content: "🔢 ";
+}
+
+.list ol {
   text-transform: uppercase;
+}
+
+#list-container {
+  display: grid;
+  justify-content: center;
+  gap: 2.2rem;
+  width: 90%;
+  max-width: 42rem;
+  margin: 0 auto;
+  margin-top: 10px;
+
+  padding: 2.8rem 6rem 4rem;
+  background: #202024;
+  border: 0.1rem solid #323238;
+  border-radius: 0.6rem;
+}
+
+#list-container header {
+  font-size: 100%;
+  font-family: Inter, sans-serif;
+  color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }

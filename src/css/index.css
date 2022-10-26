@@ -16,6 +16,11 @@
     border: none;
   }
 
+  #list-container {
+    background: none;
+    border: none;
+  }
+
   .cc-bg svg {
     width: 100%;
     height: auto;
@@ -46,5 +51,25 @@
 
   #app form {
     grid-area: C;
+  }
+
+  #list-container {
+    grid-template-areas:
+      "A"
+      "B";
+
+    width: fit-content;
+    max-width: fit-content;
+    padding-inline: 4.8rem;
+
+    grid-template-columns: 0.8fr 1fr;
+  }
+
+  #list-container header {
+    grid-area: A;
+  }
+
+  #list-data {
+    grid-area: B;
   }
 }

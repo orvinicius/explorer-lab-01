@@ -117,15 +117,15 @@ addButton.addEventListener("click", () => {
 
   listCard.insertAdjacentHTML(
     "beforeend",
-    `<li>Nome do Cartão: ${ccHolder.value}</li>`
+    `<li>NÚMERO DO CARTÃO: ${ccNumber.value}</li>`
   )
   listCard.insertAdjacentHTML(
     "beforeend",
-    `<li>Número do Cartão: ${ccNumber.value}</li>`
+    `<li>NOME DO TITULAR: ${ccHolder.value}</li>`
   )
   listCard.insertAdjacentHTML(
     "beforeend",
-    `<li>Expiração: ${ccExpiration.value}</li>`
+    `<li>EXPIRAÇÃO: ${ccExpiration.value}</li>`
   )
   listCard.insertAdjacentHTML(
     "beforeend",
